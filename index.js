@@ -23,10 +23,9 @@ function indentedLine(level) {
     return line
 }
 
-async function introspect(schemaContents) {
-    const schema = buildASTSchema(parse(schemaContents))
-    const introspectionQuery = getIntrospectionQuery()
-    return await graphql({ schema, source: introspectionQuery })
+async function introspect(schemaString) {
+    const schema = buildASTSchema(parse(schemaString))
+    return await graphql({ schema, source: getIntrospectionQuery() })
 }
 
 function makeFragments(schemaContents) {
@@ -36,7 +35,8 @@ function makeFragments(schemaContents) {
             kind === 'OBJECT' &&
             !name.startsWith('__') &&
             name !== schema.queryType.name &&
-            name !== schema.mutationType.name
+            name !== schema.mutationType.name &&
+            name !== schema.subscriptionType.name
     )
     const typesByName = index(types, 'name')
     const definitions = types
