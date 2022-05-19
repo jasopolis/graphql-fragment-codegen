@@ -6,12 +6,13 @@
   "license": "MIT",
   "main": "index.js",
   "bin": "index.js",
+  "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lachenmayer/graphql-fragment-codegen"
+    "url": "https://github.com/jasopolis/graphql-fragment-codegen"
   },
   "bugs": {
-    "url": "https://github.com/lachenmayer/graphql-fragment-codegen/issues"
+    "url": "https://github.com/jasopolis/graphql-fragment-codegen/issues"
   },
   "scripts": {
     "test": "./test.sh"

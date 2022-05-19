@@ -74,5 +74,4 @@ gql`
   ${fragments.Foo}
 `
 // ...
-
 ```
