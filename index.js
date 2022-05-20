@@ -103,6 +103,8 @@ function printField(field, typeLookupTable, indent = 1) {
             name +
             ' {' +
             indentedLine(indent + 1) +
+            '__typename' +
+            indentedLine(indent + 1) +
             typeLookupTable[type.name].possibleTypes
                 .map(
                     (possibleType) =>
