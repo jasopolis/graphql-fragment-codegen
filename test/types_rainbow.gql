@@ -1,0 +1,918 @@
+type Query
+type Mutation
+type Subscription
+
+directive @inputUnion on INPUT_OBJECT
+directive @tuple(types: [String!]!) on INPUT_OBJECT | OBJECT
+directive @map(key: String!, value: String!) on INPUT_OBJECT | OBJECT
+directive @singleton on INPUT_OBJECT | OBJECT
+
+"""
+JSON data, as a string
+"""
+scalar Json
+
+"""
+A 64-bit signed integer, as a String
+"""
+scalar SLong
+
+"""
+An arbitrarily large or small integer, as a String
+"""
+scalar SBigInt
+# Generated with types
+# RainbowModifyCommand, CommandMetadata, RainbowMetaSerialized, URainbowResponse
+
+input CasInput {
+    prevRainbow: SerialRainbowInput!
+    newRainbow: SerialRainbowInput!
+}
+
+type CasOutput {
+    prevRainbow: SerialRainbowOutput!
+    newRainbow: SerialRainbowOutput!
+}
+
+input CommandMetadataInput @inputUnion {
+    stringMetaInput: StringMetaInput
+}
+
+union CommandMetadataOutput = StringMetaOutput
+
+input FluidWithMetadataInput {
+    volume: VolumeInput!
+    metadata: Map_String_StringInput!
+}
+
+type FluidWithMetadataOutput {
+    volume: VolumeOutput!
+    metadata: Map_String_StringOutput!
+}
+
+input HeatableWellWithMetadataInput {
+    wellProperties: WellPropertiesInput!
+    id: WellIDInput!
+    temp: TempPropertiesInput!
+    metadata: Map_String_StringInput!
+}
+
+type HeatableWellWithMetadataOutput {
+    wellProperties: WellPropertiesOutput!
+    id: WellIDOutput!
+    temp: TempPropertiesOutput!
+    metadata: Map_String_StringOutput!
+}
+
+input InsertInput {
+    component: LabMetaInput!
+    id: String!
+    location: String
+}
+
+type InsertOutput {
+    component: LabMetaOutput!
+    id: String!
+    location: String
+}
+
+input InsertRainbowInput {
+    component: SerialRainbowInput!
+    location: String
+}
+
+type InsertRainbowOutput {
+    component: SerialRainbowOutput!
+    location: String
+}
+
+input LabMetaInput @inputUnion {
+    fluidWithMetadataInput: FluidWithMetadataInput
+    heatableWellWithMetadataInput: HeatableWellWithMetadataInput
+    labWithMetadataInput: LabWithMetadataInput
+    opentronPlateWithMetadataInput: OpentronPlateWithMetadataInput
+    pipetteTipWithMetadataInput: PipetteTipWithMetadataInput
+    pipettorWithMetadataInput: PipettorWithMetadataInput
+    plateWithMetadataInput: PlateWithMetadataInput
+    robotWithMetadataInput: RobotWithMetadataInput
+    shimWithMetadataInput: ShimWithMetadataInput
+    wellWithMetadataInput: WellWithMetadataInput
+    worldWithMetadataInput: WorldWithMetadataInput
+}
+
+union LabMetaOutput =
+      FluidWithMetadataOutput
+    | HeatableWellWithMetadataOutput
+    | LabWithMetadataOutput
+    | OpentronPlateWithMetadataOutput
+    | PipetteTipWithMetadataOutput
+    | PipettorWithMetadataOutput
+    | PlateWithMetadataOutput
+    | RobotWithMetadataOutput
+    | ShimWithMetadataOutput
+    | WellWithMetadataOutput
+    | WorldWithMetadataOutput
+
+input LabWithMetadataInput {
+    position: PositionInput!
+    metadata: Map_String_StringInput!
+}
+
+type LabWithMetadataOutput {
+    position: PositionOutput!
+    metadata: Map_String_StringOutput!
+}
+
+input LengthInput {
+    value: Float!
+    unit: String!
+}
+
+type LengthOutput {
+    value: Float!
+    unit: String!
+}
+
+input Map_Int_Array_Tuple_Int_StringInputInput
+    @map(key: "Int!", value: "[Tuple_Int_StringInput!]!") {
+    entries: [Tuple_Int_Array_Tuple_Int_StringInputInput!]!
+}
+
+type Map_Int_Array_Tuple_Int_StringOutputOutput
+    @map(key: "Int!", value: "[Tuple_Int_StringOutput!]!") {
+    entries: [Tuple_Int_Array_Tuple_Int_StringOutputOutput!]!
+}
+
+input Map_Int_RainbowCommandAndReverseInputInput
+    @map(key: "Int!", value: "RainbowCommandAndReverseInput!") {
+    entries: [Tuple_Int_RainbowCommandAndReverseInputInput!]!
+}
+
+type Map_Int_RainbowCommandAndReverseOutputOutput
+    @map(key: "Int!", value: "RainbowCommandAndReverseOutput!") {
+    entries: [Tuple_Int_RainbowCommandAndReverseOutputOutput!]!
+}
+
+input Map_String_Array_ParentRangeInputInput
+    @map(key: "String!", value: "[ParentRangeInput!]!") {
+    entries: [Tuple_String_Array_ParentRangeInputInput!]!
+}
+
+type Map_String_Array_ParentRangeOutputOutput
+    @map(key: "String!", value: "[ParentRangeOutput!]!") {
+    entries: [Tuple_String_Array_ParentRangeOutputOutput!]!
+}
+
+input Map_String_LabMetaInputInput
+    @map(key: "String!", value: "LabMetaInput!") {
+    entries: [Tuple_String_LabMetaInputInput!]!
+}
+
+type Map_String_LabMetaOutputOutput
+    @map(key: "String!", value: "LabMetaOutput!") {
+    entries: [Tuple_String_LabMetaOutputOutput!]!
+}
+
+input Map_String_Optional_StringInput @map(key: "String!", value: "String") {
+    entries: [Tuple_String_Optional_StringInput!]!
+}
+
+type Map_String_Optional_StringOutput @map(key: "String!", value: "String") {
+    entries: [Tuple_String_Optional_StringOutput!]!
+}
+
+input Map_String_StringInput @map(key: "String!", value: "String!") {
+    entries: [Tuple_String_StringInput!]!
+}
+
+type Map_String_StringOutput @map(key: "String!", value: "String!") {
+    entries: [Tuple_String_StringOutput!]!
+}
+
+input MultiOpInput {
+    removed: [RemoveInput!]!
+    relocate: [RelocateInput!]!
+    replace: [ReplaceInput!]!
+    insert: [InsertInput!]!
+}
+
+type MultiOpOutput {
+    removed: [RemoveOutput!]!
+    relocate: [RelocateOutput!]!
+    replace: [ReplaceOutput!]!
+    insert: [InsertOutput!]!
+}
+
+input MultiOpReverseHelperInput {
+    remove: [RemoveInput!]!
+    removeOnlyElement: [RemoveAndMakeChildrenRootInput!]!
+    replace: [ReplaceReverseInput!]!
+    relocate: [RelocateInput!]!
+    inserts: [InsertInput!]!
+}
+
+type MultiOpReverseHelperOutput {
+    remove: [RemoveOutput!]!
+    removeOnlyElement: [RemoveAndMakeChildrenRootOutput!]!
+    replace: [ReplaceReverseOutput!]!
+    relocate: [RelocateOutput!]!
+    inserts: [InsertOutput!]!
+}
+
+input OffsetInput {
+    x: LengthInput!
+    y: LengthInput!
+    z: LengthInput!
+}
+
+type OffsetOutput {
+    x: LengthOutput!
+    y: LengthOutput!
+    z: LengthOutput!
+}
+
+input OpentronPlateWithMetadataInput {
+    position: PositionInput!
+    plateName: String!
+    metadata: Map_String_StringInput!
+}
+
+type OpentronPlateWithMetadataOutput {
+    position: PositionOutput!
+    plateName: String!
+    metadata: Map_String_StringOutput!
+}
+
+input OrientationInput {
+    q0: Float!
+    q1: Float!
+    q2: Float!
+    q3: Float!
+}
+
+type OrientationOutput {
+    q0: Float!
+    q1: Float!
+    q2: Float!
+    q3: Float!
+}
+
+input ParentRangeInput {
+    id: String
+    from: Int!
+    to: Int!
+}
+
+type ParentRangeOutput {
+    id: String
+    from: Int!
+    to: Int!
+}
+
+input PipettePropertiesInput {
+    minVolume: VolumeInput!
+    maxVolume: VolumeInput!
+    channels: Int!
+    fixedPipettorHeads: Boolean!
+}
+
+type PipettePropertiesOutput {
+    minVolume: VolumeOutput!
+    maxVolume: VolumeOutput!
+    channels: Int!
+    fixedPipettorHeads: Boolean!
+}
+
+input PipetteTipWithMetadataInput {
+    offset: OffsetInput!
+    id: WellIDInput!
+    tipProperties: TipPropertiesInput!
+    metadata: Map_String_StringInput!
+}
+
+type PipetteTipWithMetadataOutput {
+    offset: OffsetOutput!
+    id: WellIDOutput!
+    tipProperties: TipPropertiesOutput!
+    metadata: Map_String_StringOutput!
+}
+
+input PipettorWithMetadataInput {
+    props: PipettePropertiesInput!
+    tipOffset: OffsetInput
+    position: PositionInput!
+    metadata: Map_String_StringInput!
+}
+
+type PipettorWithMetadataOutput {
+    props: PipettePropertiesOutput!
+    tipOffset: OffsetOutput
+    position: PositionOutput!
+    metadata: Map_String_StringOutput!
+}
+
+input PlateWithMetadataInput {
+    position: PositionInput!
+    metadata: Map_String_StringInput!
+}
+
+type PlateWithMetadataOutput {
+    position: PositionOutput!
+    metadata: Map_String_StringOutput!
+}
+
+input PositionInput {
+    offset: OffsetInput!
+    orientation: OrientationInput!
+}
+
+type PositionOutput {
+    offset: OffsetOutput!
+    orientation: OrientationOutput!
+}
+
+input RainbowCommandAndReverseInput {
+    comm: RainbowModifyCommandInput!
+    reverse: ValidReverseInput!
+    metadata: CommandMetadataInput!
+}
+
+type RainbowCommandAndReverseOutput {
+    comm: RainbowModifyCommandOutput!
+    reverse: ValidReverseOutput!
+    metadata: CommandMetadataOutput!
+}
+
+input RainbowHistoricalResponseInput {
+    messages: Map_Int_RainbowCommandAndReverseInputInput!
+    edges: Map_Int_Array_Tuple_Int_StringInputInput!
+}
+
+type RainbowHistoricalResponseOutput {
+    messages: Map_Int_RainbowCommandAndReverseOutputOutput!
+    edges: Map_Int_Array_Tuple_Int_StringOutputOutput!
+}
+
+input RainbowHistoricalResponseWithParentsInput {
+    messages: Map_Int_RainbowCommandAndReverseInputInput!
+    edges: Map_Int_Array_Tuple_Int_StringInputInput!
+    parents: Map_String_Array_ParentRangeInputInput!
+}
+
+type RainbowHistoricalResponseWithParentsOutput {
+    messages: Map_Int_RainbowCommandAndReverseOutputOutput!
+    edges: Map_Int_Array_Tuple_Int_StringOutputOutput!
+    parents: Map_String_Array_ParentRangeOutputOutput!
+}
+
+input RainbowHistoryResponseInput {
+    response: RainbowHistoricalResponseInput!
+}
+
+type RainbowHistoryResponseOutput {
+    response: RainbowHistoricalResponseOutput!
+}
+
+input RainbowHistoryWithParentResponseInput {
+    response: RainbowHistoricalResponseWithParentsInput!
+}
+
+type RainbowHistoryWithParentResponseOutput {
+    response: RainbowHistoricalResponseWithParentsOutput!
+}
+
+input RainbowModifyCommandInput @inputUnion {
+    casInput: CasInput
+    insertInput: InsertInput
+    multiOpInput: MultiOpInput
+    relocateInput: RelocateInput
+    removeInput: RemoveInput
+    replaceInput: ReplaceInput
+}
+
+union RainbowModifyCommandOutput =
+      CasOutput
+    | InsertOutput
+    | MultiOpOutput
+    | RelocateOutput
+    | RemoveOutput
+    | ReplaceOutput
+
+input RainbowResponseInput {
+    rainbow: SerialRainbowInput!
+}
+
+type RainbowResponseOutput {
+    rainbow: SerialRainbowOutput!
+}
+
+input RainbowTinkerResponseInput {
+    response: String!
+}
+
+type RainbowTinkerResponseOutput {
+    response: String!
+}
+
+input RelocateInput {
+    id: String!
+    location: String
+}
+
+type RelocateOutput {
+    id: String!
+    location: String
+}
+
+input RemoveAndMakeChildrenRootInput {
+    id: String!
+}
+
+type RemoveAndMakeChildrenRootOutput {
+    id: String!
+}
+
+input RemoveInput {
+    id: String!
+}
+
+type RemoveOutput {
+    id: String!
+}
+
+input RemoveMultipleInput {
+    ids: [String!]!
+}
+
+type RemoveMultipleOutput {
+    ids: [String!]!
+}
+
+input ReplaceInput {
+    oldId: String
+    newId: String!
+    component: LabMetaInput!
+}
+
+type ReplaceOutput {
+    oldId: String
+    newId: String!
+    component: LabMetaOutput!
+}
+
+input ReplaceReverseInput {
+    oldId: String
+    newId: String!
+    component: LabMetaInput!
+    location: String
+}
+
+type ReplaceReverseOutput {
+    oldId: String
+    newId: String!
+    component: LabMetaOutput!
+    location: String
+}
+
+input RobotWithMetadataInput {
+    position: PositionInput!
+    metadata: Map_String_StringInput!
+}
+
+type RobotWithMetadataOutput {
+    position: PositionOutput!
+    metadata: Map_String_StringOutput!
+}
+
+input SerialRainbowInput {
+    mapIdToParent: Map_String_Optional_StringInput!
+    mapIdToElement: Map_String_LabMetaInputInput!
+}
+
+type SerialRainbowOutput {
+    mapIdToParent: Map_String_Optional_StringOutput!
+    mapIdToElement: Map_String_LabMetaOutputOutput!
+}
+
+input ShimWithMetadataInput {
+    position: PositionInput!
+    metadata: Map_String_StringInput!
+}
+
+type ShimWithMetadataOutput {
+    position: PositionOutput!
+    metadata: Map_String_StringOutput!
+}
+
+input StringMetaInput {
+    message: String!
+}
+
+type StringMetaOutput {
+    message: String!
+}
+
+input TempPropertiesInput {
+    minTemp: TemperatureInput!
+    maxTemp: TemperatureInput!
+}
+
+type TempPropertiesOutput {
+    minTemp: TemperatureOutput!
+    maxTemp: TemperatureOutput!
+}
+
+input TemperatureInput {
+    value: Float!
+    unit: String!
+}
+
+type TemperatureOutput {
+    value: Float!
+    unit: String!
+}
+
+input TipPropertiesInput {
+    volume: VolumeInput!
+    length: LengthInput!
+}
+
+type TipPropertiesOutput {
+    volume: VolumeOutput!
+    length: LengthOutput!
+}
+
+input Tuple_Int_Array_Tuple_Int_StringInputInput
+    @tuple(types: ["Int!", "[Tuple_Int_StringInput!]!"]) {
+    _1: Int!
+    _2: [Tuple_Int_StringInput!]!
+}
+
+type Tuple_Int_Array_Tuple_Int_StringOutputOutput
+    @tuple(types: ["Int!", "[Tuple_Int_StringOutput!]!"]) {
+    _1: Int!
+    _2: [Tuple_Int_StringOutput!]!
+}
+
+input Tuple_Int_RainbowCommandAndReverseInputInput
+    @tuple(types: ["Int!", "RainbowCommandAndReverseInput!"]) {
+    _1: Int!
+    _2: RainbowCommandAndReverseInput!
+}
+
+type Tuple_Int_RainbowCommandAndReverseOutputOutput
+    @tuple(types: ["Int!", "RainbowCommandAndReverseOutput!"]) {
+    _1: Int!
+    _2: RainbowCommandAndReverseOutput!
+}
+
+input Tuple_Int_StringInput @tuple(types: ["Int!", "String!"]) {
+    _1: Int!
+    _2: String!
+}
+
+type Tuple_Int_StringOutput @tuple(types: ["Int!", "String!"]) {
+    _1: Int!
+    _2: String!
+}
+
+input Tuple_String_Array_ParentRangeInputInput
+    @tuple(types: ["String!", "[ParentRangeInput!]!"]) {
+    _1: String!
+    _2: [ParentRangeInput!]!
+}
+
+type Tuple_String_Array_ParentRangeOutputOutput
+    @tuple(types: ["String!", "[ParentRangeOutput!]!"]) {
+    _1: String!
+    _2: [ParentRangeOutput!]!
+}
+
+input Tuple_String_LabMetaInputInput
+    @tuple(types: ["String!", "LabMetaInput!"]) {
+    _1: String!
+    _2: LabMetaInput!
+}
+
+type Tuple_String_LabMetaOutputOutput
+    @tuple(types: ["String!", "LabMetaOutput!"]) {
+    _1: String!
+    _2: LabMetaOutput!
+}
+
+input Tuple_String_Optional_StringInput @tuple(types: ["String!", "String"]) {
+    _1: String!
+    _2: String
+}
+
+type Tuple_String_Optional_StringOutput @tuple(types: ["String!", "String"]) {
+    _1: String!
+    _2: String
+}
+
+input Tuple_String_StringInput @tuple(types: ["String!", "String!"]) {
+    _1: String!
+    _2: String!
+}
+
+type Tuple_String_StringOutput @tuple(types: ["String!", "String!"]) {
+    _1: String!
+    _2: String!
+}
+
+input URainbowGeneralErrorInput {
+    message: String!
+}
+
+type URainbowGeneralErrorOutput {
+    message: String!
+}
+
+input URainbowResponseInput @inputUnion {
+    rainbowHistoryResponseInput: RainbowHistoryResponseInput
+    rainbowHistoryWithParentResponseInput: RainbowHistoryWithParentResponseInput
+    rainbowResponseInput: RainbowResponseInput
+    rainbowTinkerResponseInput: RainbowTinkerResponseInput
+    uRainbowGeneralErrorInput: URainbowGeneralErrorInput
+}
+
+union URainbowResponseOutput =
+      RainbowHistoryResponseOutput
+    | RainbowHistoryWithParentResponseOutput
+    | RainbowResponseOutput
+    | RainbowTinkerResponseOutput
+    | URainbowGeneralErrorOutput
+
+input ValidReverseInput @inputUnion {
+    casInput: CasInput
+    insertInput: InsertInput
+    insertRainbowInput: InsertRainbowInput
+    multiOpReverseHelperInput: MultiOpReverseHelperInput
+    relocateInput: RelocateInput
+    removeInput: RemoveInput
+    removeAndMakeChildrenRootInput: RemoveAndMakeChildrenRootInput
+    removeMultipleInput: RemoveMultipleInput
+    replaceReverseInput: ReplaceReverseInput
+}
+
+union ValidReverseOutput =
+      CasOutput
+    | InsertOutput
+    | InsertRainbowOutput
+    | MultiOpReverseHelperOutput
+    | RelocateOutput
+    | RemoveOutput
+    | RemoveAndMakeChildrenRootOutput
+    | RemoveMultipleOutput
+    | ReplaceReverseOutput
+
+input VolumeInput {
+    value: Float!
+    unit: String!
+}
+
+type VolumeOutput {
+    value: Float!
+    unit: String!
+}
+
+input WellIDInput {
+    id: String!
+}
+
+type WellIDOutput {
+    id: String!
+}
+
+input WellPropertiesInput {
+    x: LengthInput!
+    y: LengthInput!
+    z: LengthInput!
+    depth: LengthInput!
+    diameter: LengthInput!
+    total_liquid_volume: VolumeInput!
+}
+
+type WellPropertiesOutput {
+    x: LengthOutput!
+    y: LengthOutput!
+    z: LengthOutput!
+    depth: LengthOutput!
+    diameter: LengthOutput!
+    total_liquid_volume: VolumeOutput!
+}
+
+input WellWithMetadataInput {
+    wellProperties: WellPropertiesInput!
+    id: WellIDInput!
+    metadata: Map_String_StringInput!
+}
+
+type WellWithMetadataOutput {
+    wellProperties: WellPropertiesOutput!
+    id: WellIDOutput!
+    metadata: Map_String_StringOutput!
+}
+
+input WorldWithMetadataInput {
+    position: PositionInput!
+    metadata: Map_String_StringInput!
+}
+
+type WorldWithMetadataOutput {
+    position: PositionOutput!
+    metadata: Map_String_StringOutput!
+}
+extend type Query {
+    getRainbow: RainbowResponseOutput
+    getRainbowWithId(id: String!): RainbowResponseOutput
+    getRainbowAtOffset(offset: Int!): RainbowResponseOutput
+    getRainbowAtMessage(messageIndex: Int!): RainbowResponseOutput
+    getRainbowHistory(id: String!): RainbowHistoryResponseOutput
+    getRainbowHistoryWithParents(
+        id: String!
+    ): RainbowHistoryWithParentResponseOutput
+    tinkerPopQueryRainbow(query: String!): RainbowTinkerResponseOutput
+    tinkerPopQueryRainbowJson(query: String!): Json
+    tinkerPopQueryRainbowHistorical(query: String!): RainbowTinkerResponseOutput
+}
+
+extend type Mutation {
+    modifyRainbowCommand(
+        command: RainbowModifyCommandInput!
+        meta: CommandMetadataInput = null
+    ): RainbowResponseOutput
+    casModifyRainbowCommand(
+        prevRainbow: SerialRainbowInput!
+        command: RainbowModifyCommandInput!
+        meta: CommandMetadataInput = null
+    ): RainbowResponseOutput
+    modifyRainbowCommandList(
+        commands: [ModifyCommandArgs!]!
+    ): RainbowResponseOutput
+}
+
+input ModifyCommandArgs {
+    command: RainbowModifyCommandInput!
+    meta: CommandMetadataInput
+}
+
+extend type Subscription {
+    getCurrentRainbow: RainbowResponseOutput!
+}
+extend type Query {
+    schedule(input: SchedulerInput!): SchedulerStateOutput!
+}
+
+input SchedulerInput {
+    tasks: [TaskInput!]!
+    edges: [EdgeInput!]!
+    resources: [ResourceInput!]!
+    groups: [GroupInput!]!
+    initialState: SchedulerStateInput
+    startTime: TimeInput!
+    consumerProducerMap: [ConsumerProducerInput!]
+    scheduler: [String!]
+}
+
+input TaskInput {
+    id: String!
+    taskType: String!
+    resourceRequirements: [ResourceRequirementInput!]!
+    groups: [String!]!
+    resourceRequirementsOr: [[ResourceRequirementInput!]!]
+}
+
+input ResourceRequirementInput {
+    id: String!
+    amount: Int!
+    durationSeconds: SLong!
+}
+
+input EdgeInput {
+    source: String!
+    target: String!
+    minSeconds: SLong
+    maxSeconds: SLong
+}
+
+input ResourceInput {
+    id: String!
+    replicasCount: Int!
+    resourceType: String
+    shifts: [Int!]
+}
+
+enum GroupType {
+    BLOCK
+    SAME
+    SPECIFIC
+}
+
+input GroupInput {
+    id: String!
+    groupType: GroupType!
+    resourceRequirements: [GroupResourceRequirementInput!]
+    blockEndAtEndTime: Boolean
+    specificReplicas: [SpecificReplicaRequirementInput!]
+}
+
+input GroupResourceRequirementInput {
+    resourceId: String!
+    amount: Int!
+}
+
+input SpecificReplicaRequirementInput {
+    taskId: String!
+    replicas: [Int!]!
+}
+
+input SchedulerStateInput {
+    tasksAssigned: [TaskAssignmentInput!]!
+    groupsAssigned: [GroupAssignmentInput!]!
+    unscheduledTasks: [String!]!
+    unscheduledGroups: [String!]!
+}
+type SchedulerStateOutput {
+    tasksAssigned: [TaskAssignmentOutput!]!
+    groupsAssigned: [GroupAssignmentOutput!]!
+    unscheduledTasks: [String!]!
+    unscheduledGroups: [String!]!
+}
+
+input TaskAssignmentInput {
+    taskId: String!
+    startTime: TimeInput!
+    endTime: TimeInput!
+    assignedResources: [ResourceAssignmentInput!]!
+    slack: SlackInput
+}
+type TaskAssignmentOutput {
+    taskId: String!
+    startTime: TimeOutput!
+    endTime: TimeOutput!
+    assignedResources: [ResourceAssignmentOutput!]!
+    slack: SlackOutput
+}
+
+input ResourceAssignmentInput {
+    resourceId: String!
+    startTime: TimeInput!
+    endTime: TimeInput!
+    replicas: [Int!]!
+}
+type ResourceAssignmentOutput {
+    resourceId: String!
+    startTime: TimeOutput!
+    endTime: TimeOutput!
+    replicas: [Int!]!
+}
+
+input GroupAssignmentInput {
+    groupId: String!
+    startTime: TimeInput
+    endTime: TimeInput
+    resourceRequirements: [GroupResourceAssignmentInput]
+}
+type GroupAssignmentOutput {
+    groupId: String!
+    startTime: TimeOutput
+    endTime: TimeOutput
+    resourceRequirements: [GroupResourceAssignmentOutput!]!
+}
+
+input GroupResourceAssignmentInput {
+    resourceId: String!
+    replicas: [Int!]!
+}
+type GroupResourceAssignmentOutput {
+    resourceId: String!
+    replicas: [Int!]!
+}
+
+input TimeInput {
+    secondsSinceEpoch: SLong!
+}
+type TimeOutput {
+    secondsSinceEpoch: SLong!
+}
+
+input SlackInput {
+    minStart: TimeInput!
+    maxStart: TimeInput!
+}
+type SlackOutput {
+    minStart: TimeOutput!
+    maxStart: TimeOutput!
+}
+
+input ConsumerProducerInput {
+    id: String!
+    consumers: [ConsumerProducerSelectionInput!]!
+    producers: [ConsumerProducerSelectionInput!]!
+}
+
+input ConsumerProducerSelectionInput {
+    id: String!
+    amount: Int!
+}
